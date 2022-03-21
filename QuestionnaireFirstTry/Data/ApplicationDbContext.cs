@@ -14,5 +14,16 @@ namespace QuestionnaireFirstTry.Data
         {
         }
         public DbSet<Question> Question { get; set; }
+        public DbSet<ClaimModel> Claims    { get; set; }
+        protected override  void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.Entity<ClaimModel>().HasData(new ClaimModel("View Question"));
+            builder.Entity<ClaimModel>().HasData(new ClaimModel("Edit Question"));
+            builder.Entity<ClaimModel>().HasData(new ClaimModel("Remove Question"));
+            builder.Entity<ClaimModel>().HasData(new ClaimModel("Add Question"));
+            
+            
+        }
     }
 }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QuestionnaireFirstTry.Data;
 
 namespace QuestionnaireFirstTry.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220321202633_addClaimsTable")]
+    partial class addClaimsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -235,28 +237,6 @@ namespace QuestionnaireFirstTry.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Claims");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Type = "View Question"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Type = "Edit Question"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Type = "Remove Question"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Type = "Add Question"
-                        });
                 });
 
             modelBuilder.Entity("QuestionnaireFirstTry.Models.Question", b =>

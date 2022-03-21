@@ -11,7 +11,6 @@ using QuestionnaireFirstTry.Models;
 
 namespace QuestionnaireFirstTry.Controllers
 {
-    [Authorize]
     public class QuestionnaireController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,6 +21,7 @@ namespace QuestionnaireFirstTry.Controllers
         }
 
         // GET: Questionnaire
+        [Authorize(Policy = "View Questions Policy")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Question.ToListAsync());
@@ -29,6 +29,8 @@ namespace QuestionnaireFirstTry.Controllers
 
 
         // GET: Questionnaire/Create
+        [Authorize(Policy = "Add Questions Policy")]
+
         public IActionResult Create()
         {
             return View();
@@ -39,6 +41,8 @@ namespace QuestionnaireFirstTry.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Add Questions Policy")]
+
         public async Task<IActionResult> Create([Bind("Id,QuestionBody,Option1,Option2,Option3,InsertDate,Active")] Question question)
         {
             if (ModelState.IsValid)
@@ -54,6 +58,8 @@ namespace QuestionnaireFirstTry.Controllers
         }
 
         // GET: Questionnaire/Edit/5
+        [Authorize(Policy = "Edit Questions Policy")]
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -74,6 +80,8 @@ namespace QuestionnaireFirstTry.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Edit Questions Policy")]
+
         public async Task<IActionResult> Edit(int id, [Bind("Id,QuestionBody,Option1,Option2,Option3")] Question question)
         {
             if (id != question.Id)
@@ -98,6 +106,8 @@ namespace QuestionnaireFirstTry.Controllers
         }
 
         // GET: Questionnaire/Delete/5
+        [Authorize(Policy = "Remove Questions Policy")]
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -118,6 +128,8 @@ namespace QuestionnaireFirstTry.Controllers
         // POST: Questionnaire/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Remove Questions Policy")]
+
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var question = await _context.Question.FindAsync(id);

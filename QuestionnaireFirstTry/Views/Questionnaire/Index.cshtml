@@ -7,7 +7,10 @@
 <h1>Index</h1>
 
 <p>
-    <a class="btn btn-primary float-right mb-4" asp-action="Create">Create New</a>
+    @if (User.Claims.Any(claim => claim.Type == "Add Question"))
+    {
+        <a class="btn btn-primary float-right mb-4" asp-action="Create">Create New</a>
+    }
 </p>
 <table class="table">
     <thead>
@@ -61,10 +64,20 @@
                 @Html.DisplayFor(modelItem => item.Active)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
+                    @if(User.Claims.Any(claim => claim.Type == "Edit Question"))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> 
+                    }
+                    @if (User.Claims.Any(claim => claim.Type == "View Question"))
+                    {
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    
+                        }
+                    @if (User.Claims.Any(claim => claim.Type == "Remove Question"))
+                    {
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    }
+                </td>
         </tr>
 }
     </tbody>

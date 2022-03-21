@@ -1,0 +1,38 @@
+﻿@model IEnumerable<QuestionnaireFirstTry.Models.UserViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>UserName</th>
+            <th>Roles</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>@item.UserName</td>
+             <td
+             ><ul>
+                        @foreach (var role in item.Roles)
+                        {
+                            <li>@role</li>
+                        }
+            </ul>
+            </td>
+            <td>
+                <a asp-action="AssignRoles" asp-route-id="@item.Id">AssignRoles</a> 
+                
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

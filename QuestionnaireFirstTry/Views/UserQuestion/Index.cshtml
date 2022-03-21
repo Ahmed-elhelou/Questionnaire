@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Question>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div class="container mt-sm-5 my-1">
+    @foreach(var q in Model)
+    {
+        <div class="question ml-sm-5 pl-sm-5 pt-2">
+        <div class="py-2 h5">
+            <b>@q.QuestionBody</b>
+            </div>
+        <div class="btn-group" data-toggle="buttons">
+        		<label class="btn btn-primary active">
+        			<input type="radio" name="options" id="option1" autocomplete="off" checked>@q.Option1
+        		</label>
+
+        		<label class="btn btn-primary">
+        			<input type="radio" name="options" id="option2" autocomplete="off" >@q.Option2
+        		</label>
+
+        		<label class="btn btn-primary">
+        			<input type="radio" name="options" id="option3" autocomplete="off" >@q.Option3
+        		</label>
+
+        	</div>
+        </div>
+
+    }
+    
+    
+</div>
