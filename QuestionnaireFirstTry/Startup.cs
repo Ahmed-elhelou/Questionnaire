@@ -43,29 +43,28 @@ namespace QuestionnaireFirstTry
                     Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<IdentityUser,IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders()
+                 .AddDefaultUI(); 
 
 
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("View Questions Policy", policy =>
                 {
-                    policy.RequireRole("Admin");
+                   
                     policy.RequireClaim("View Question");
                 });
                 options.AddPolicy("Remove Questions Policy", policy =>
                 {
-                    policy.RequireRole("Admin");
                     policy.RequireClaim("Remove Question");
                 });
                 options.AddPolicy("Edit Questions Policy", policy =>
                 {
-                    policy.RequireRole("Admin");
                     policy.RequireClaim("Edit Question");
                 });
                 options.AddPolicy("Add Questions Policy", policy =>
                 {
-                    policy.RequireRole("Admin");
                     policy.RequireClaim("Add Question");
                 });
 

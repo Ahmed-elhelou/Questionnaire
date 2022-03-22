@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuestionnaireFirstTry.Data;
 using System.Threading.Tasks;
 
 namespace QuestionnaireFirstTry.Controllers
 {
+    [Authorize]
     public class UserQuestion : Controller
     {
         private readonly ApplicationDbContext _context;

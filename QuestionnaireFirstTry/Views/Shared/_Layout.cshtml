@@ -22,18 +22,27 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
+                        @if(User.Claims.Any(claim=> claim.Type == "View Question"))
+                        {
+                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Questionnaire" asp-action="Index">Manage Ques</a>
                         </li>
+
+                        }
+                       
+                       
                          <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="UserQuestion" asp-action="Index">Questions</a>
                         </li>
-                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="RoleViewModels" asp-action="Index">Roles</a>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="RoleViewModels" asp-action="Index">Roles</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Users</a>
                         </li>
-                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Users</a>
-                        </li>
+                        }
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
